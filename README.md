@@ -1,0 +1,2 @@
+# example
+JS常用
