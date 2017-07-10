@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded',function(){
-  var box=document.getElementById('box');
+  /*var box=document.getElementById('box');
   var btn=document.getElementsByTagName('button')[0];
   btn.addEventListener('click',function(){
     animate({
@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded',function(){
       fn:function(){alert('')}
     })
   })
-})
+})*/
 
 
 
@@ -67,8 +67,6 @@ function animate(obj){
   }
 
 
-
-
     if(flag){
       clearInterval(element.timer);
       if(obj.fn){obj.fn()}
@@ -78,8 +76,6 @@ function animate(obj){
     document.getElementById('show').innerHTML+=parseInt(getStyle(element,attr))+'<br/>';
   },50)
 }
-
-
 
 function getStyle(element,attr){
   return window.getComputedStyle?window.getComputedStyle(element, null)[attr]:element.currentStyle[attr];
