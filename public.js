@@ -212,6 +212,10 @@ function getcode (evt){
     }
 }
 
+//替换指定字符
+function str_replace(str,pos,replaceText){
+    return str.substr(0,pos)+replaceText+str.slice(pos+1);
+}
 
 
 //设置cookie
