@@ -161,8 +161,25 @@ function selectText(){
   
   //兼容获取事件目标
 function getTarget(evt){
-	var e=evt || window.event;
-    return e.target || e.srcElement;
+    return evt.target?event.target:window.event.srcElement;
+}
+
+//添加事件
+function addEvent(obj,type,fn){
+	if(obj.addEventListener) {
+		obj.addEventListener(type,fn,false);
+	} else if(obj.attachEvent){
+		obj.attachEvent('on'+type,fn);
+	}
+}
+
+//移除事件
+function removeEvent(obj,type,fn){
+	if(obj.removeEventListener){
+		obj.removeEventListener(type,fn,false);
+	} else if(obj.detachEvent){
+		obj.detachEvent('on'+type,fn);
+	}
 }
 
 //取消默认行为
