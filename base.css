@@ -35,3 +35,7 @@ ol,ul{
 	visibility: hidden;
 	clear: both;
 }
+img {
+	display:block;
+	max-width:100%;
+}
