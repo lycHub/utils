@@ -1,5 +1,5 @@
-window.addEventListener('DOMContentLoaded',function(){
-  /*var box=document.getElementById('box');
+/*window.addEventListener('DOMContentLoaded',function(){
+  var box=document.getElementById('box');
   var btn=document.getElementsByTagName('button')[0];
   btn.addEventListener('click',function(){
     animate({
