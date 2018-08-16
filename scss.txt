@@ -1,0 +1,88 @@
+//将一个选择器下的所有样式继承给另一个选择器
+
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+
+@extend就是继承的意思
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.error.intrusion {		//就算是这样也能被继承，即.seriousError.intrusion也有此样式
+  background-image: url("/image/hacked.png");
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+
+//伪类也可以被继承
+.hoverlink {
+  @extend a:hover;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+编译为
+a:hover, .hoverlink {
+  text-decoration: underline; }
+  
+  
+/********************************************/  
+定义重复样式
+@mixin large-text {
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
+}
+
+引用重复样式
+.page-title {
+  @include large-text;
+  padding: 4px;
+  margin-top: 10px;
+}
+
+混合样式中也可以包含其他混合样式
+@mixin compound {
+  @include highlighted-background;
+  @include header-text;
+}
+@mixin highlighted-background { background-color: #fc0; }
+@mixin header-text { font-size: 20px; }
+
+
+
+//带参数的重复样式
+
+@mixin sexy-border($color: blue, $width) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
+}
+p { @include sexy-border(blue, 1in); }
+
+
+//有时，不能确定混合指令需要使用多少个参数，
+比如一个关于 box-shadow 的混合指令不能确定有多少个 'shadow' 会被用到。
+这时，可以使用参数变量 … 声明（写在参数的最后方）告诉 Sass 将这些参数视为值列表处理
+@mixin box-shadow($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+.shadows {
+  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}

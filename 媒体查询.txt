@@ -1,0 +1,7 @@
+/*媒体查询*/
+@media screen and (win-width:1200px){屏幕>1200时生效}
+@media not screen and (win-width:1200px){屏幕>1200时无效}
+@media screen and (win-width:1200px) and (min-height:800px) and ()...{同时满足各条件时生效时生效}
+
+外部引入,当满足条件时,这个css文件才会生效
+<link rel="stylesheet" type="text/css" href="xxx.css" media="screen and (win-width:1200px)"/>

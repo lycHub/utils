@@ -1,0 +1,98 @@
+/**
+   * 使用动画形式将 `el` 滚动至某位置
+   *
+   * @param containerEl 容器，默认 `window`
+   * @param targetTopValue 滚动至目标 `top` 值，默认：0，相当于顶部
+   * @param easing 动作算法，默认：`easeInOutCubic`
+   * @param callback 动画结束后回调
+   */
+  scrollTo(
+    containerEl: Element | Window,
+    targetTopValue: number = 0,
+    easing?: EasyingFn,
+    callback?: () => void
+  ): void {
+    const target = containerEl ? containerEl : window;
+    const scrollTop = this.getScroll(target);
+    const startTime = Date.now();
+    const frameFunc = () => {
+      const timestamp = Date.now();
+      const time = timestamp - startTime;
+      this.setScrollTop(target, (easing || easeInOutCubic)(time, scrollTop, targetTopValue, 450));
+      if (time < 450) {
+        // reqAnimFrame(frameFunc);
+        window.requestAnimationFrame(frameFunc);
+      } else {
+        if (callback) callback();
+      }
+    };
+    window.requestAnimationFrame(frameFunc);
+    // reqAnimFrame(frameFunc);
+  }
+  
+  
+  
+  
+  
+  // 例2
+  animation(ele, positions, rabbit);
+
+function animation(ele, positions, imgUrl) {
+  $(ele).css('background', `url(${imgUrl}) no-repeat`);
+
+  // 当前索引(帧)
+  let index = 0;
+
+  const startTime = Date.now();
+  function run() {
+    const timestamp = Date.now();
+    const time = timestamp - startTime;
+
+
+    const position = positions[index].split(' ');
+    $(ele).css('backgroundPosition', `${position[0]}px ${position[1]}px`);
+    index++;
+    if (index >= positions.length) index = 0;
+
+    // time可以控制动画持续时间: if (time < 2000)
+    // 定时器可以控制频率
+    const ani = () => {
+      setTimeout(run, 100);
+    }
+    window.requestAnimationFrame(ani);
+  }
+  window.requestAnimationFrame(run);
+  // run();
+}
+
+
+
+// 兼容写法
+export const requestAnimationFrame = (() => {
+  if (!inBrowser) {
+    /* istanbul ignore if */
+    return noop
+  }
+  return window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    // if all else fails, use setTimeout
+    function (callback) {
+      return window.setTimeout(callback, (callback.interval || DEFAULT_INTERVAL) / 2) // make interval as precise as possible.
+    }
+})()
+
+export const cancelAnimationFrame = (() => {
+  if (!inBrowser) {
+    /* istanbul ignore if */
+    return noop
+  }
+  return window.cancelAnimationFrame ||
+    window.webkitCancelAnimationFrame ||
+    window.mozCancelAnimationFrame ||
+    window.oCancelAnimationFrame ||
+    function (id) {
+      window.clearTimeout(id)
+    }
+})()

@@ -1,0 +1,29 @@
+1.动态设置html的font-size
+
+const htmlWdith = document.documentElement.clientWidth || document.body.clientWidth;
+const htmlDom = document.getElementsByTagName('html')[0];
+htmlDom.style.fontSize = htmlWdith / 10 + 'px';
+
+
+2.定义sass函数(px自动换算成rem)
+假设设计稿为750px, 也就是最低适配375
+
+$baseWidth: 37.5px;
+
+@function px2rem($px) {
+	$baseRem: $baseWidth;
+	@return ($px / $baseRem) + rem;
+}
+
+使用：
+.hello {
+	width: 95%;
+	height: px2rem(25px); // 1.3333rem
+}
+
+
+另一种方法
+html{
+	font-size:62.5%;
+}
+此时1rem=10px

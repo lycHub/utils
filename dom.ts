@@ -403,3 +403,20 @@ function removeChild(element: any, target: any) {
     else
         throw 'Cannot remove ' + element + ' from ' + target;
 }
+
+
+/*
+* 向前插入节点
+* */
+
+function prepend(el, target) {
+    if (target.firstChild) {
+        before(el, target.firstChild);
+    } else {
+        target.appendChild(el);
+    }
+}
+
+function before(el, target) {
+    target.parentNode.insertBefore(el, target);
+}

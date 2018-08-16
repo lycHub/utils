@@ -1,3 +1,9 @@
+const inBrowser = typeof window !== 'undefined';
+const ua = inBrowser && navigator.userAgent.toLowerCase();
+const isWeChatDevTools = ua && /wechatdevtools/.test(ua);
+const isAndroid = ua && ua.indexOf('android') > 0;
+
+
 /*
 * 是否IE
 * */
@@ -61,5 +67,21 @@ function resolveUserAgent() {
     return {
         browser: match[1] || '',
         version: match[2] || 0
+    };
+}
+
+
+/*
+* 是否有触摸事件
+* */
+function hasTouch() {
+    const global = window || this;
+    const hasTouch = !!(('ontouchstart' in global && !/Mac OS X /.test(global.navigator.userAgent)) || global.DocumentTouch && document instanceof global.DocumentTouch);
+    return {
+        hasTouch: hasTouch,
+        startEvt: hasTouch ? 'touchstart' : 'mousedown',
+        moveEvt: hasTouch ? 'touchmove' : 'mousemove',
+        endEvt: hasTouch ? 'touchend' : 'mouseup',
+        cancelEvt: hasTouch ? 'touchcancel' : 'mouseout'
     };
 }

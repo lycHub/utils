@@ -1,0 +1,79 @@
+new Swiper ('.swiper-container', {
+ init: false,					//禁止立即初始化，可以稍后使用mySwiper.init()来初始化
+		width/height: 300,		//slider宽高
+		autoHeight: true, //高度随内容变化
+      initialSlide :2,			//初始化是显示索引=2的那张图
+	  direction : 'vertical',	//纵向
+	  speed:300,				//滑动速度
+	  grabCursor: true			//拖动时鼠标变为手形
+	   setWrapperSize :true,	//flex支持
+	   roundLengths : true, 	//slider宽高取整
+	   watchOverflow: true,		//因为仅有1个slide，swiper无效
+	    runCallbacksOnInit : false,		//初始化时不触发回调
+		slideToClickedSlide：true		//点击slider也滑动
+		
+		
+		//布局
+		slidesPerColumn: 2		//显示两行
+		slidesPerView：3		//设置一行同时显示3张
+		 slidesPerGroup : 3,	//设置每次滚动3张
+		 spaceBetween : 20,		//设置slider之间的距离
+		 slidesOffsetBefore : 100,		//slider与左边框偏移100px
+		 slidesOffsetAfter:100			//slider与右边框偏移100px
+		
+		
+		//自由模式
+		freeMode：true						//开启free模式(不会自动粘合)
+		freeModeSticky：true				//free模式下的自动粘合
+		freeModeMomentum： false			//取消惯性
+		freeModeMomentumRatio：2000			//设置惯性持续2秒
+		freeModeMomentumVelocityRatio : 5,	//设置惯性速度
+		
+		
+		//触摸
+		allowTouchMove: false,		//禁止触摸滑动
+		shortSwipes：false			//禁止短切换(即手指滑动距离过短无法滑动)
+		longSwipes：false			//禁止长切换
+		threshold : 100,			//拖动距离<100px时不会滑动
+		touchAngle: 10				//触发拖动的角度值（即不需要水平也能滑动）
+		 touchEventsTarget: 'wrapper',	//接受touch事件的目标，可以设为container或者wrapper。
+		
+		
+		
+		//禁止切换
+		preventIntercationOnTransition : true,			//slider处于惯性阶段时无法滑动
+		
+		
+		
+		//Swiper属性
+		realIndex			//当前索引
+		previousIndex		//上一个索引
+		......
+		
+		
+		//Swiper方法
+		this.slidePrev();	//向前滑动
+		
+		
+		
+		
+		
+		//回调函数的设置
+		on: {	//可设置多个回调
+				slideChange: function () {
+				  console.log(this.activeIndex);
+				},
+			}
+		});
+		
+		
+		//外部使用回调
+		mySwiper.on('slideChange', function () {});
+	
+	
+	
+	
+	//其他功能
+	嵌套轮播：nested
+	响应式：breakpoints
+	命名空间：可以设置各部件的类名
