@@ -24,6 +24,6 @@ $baseWidth: 37.5px;
 
 另一种方法
 html{
-	font-size:62.5%;
+	font-size:625%;
 }
-此时1rem=10px
+此时1rem=100px
