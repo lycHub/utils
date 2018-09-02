@@ -1,0 +1,61 @@
+@nice-blue: #ad2393;
+
+.my-mixin {
+  color: @nice-blue;
+}
+
+// 带括号的不会进行编译输出
+.my-other-mixin() {
+  font-size: 30px;
+  &:hover {
+    color: red;
+  }
+}
+
+
+/* 混入（合并样式）*/
+#box{
+  .inline{
+    .my-mixin;
+  }
+
+  .exd{
+    .inline;
+    .my-other-mixin;
+  }
+}
+
+
+// 嵌套
+#my-library {
+  .my-mixin() {
+    color: black;
+  }
+}
+// 可以这样调用
+.class {
+  #my-library > .my-mixin();
+}
+
+
+// !important
+.foo (@bg: #f5f5f5, @color: #900) {
+  background: @bg;
+  color: @color;
+}
+.unimportant {
+  .foo();
+}
+.important {
+  .foo() !important;
+}
+// 结果为:
+
+.unimportant {
+  background: #f5f5f5;
+  color: #900;
+}
+.important {
+  background: #f5f5f5 !important;
+  color: #900 !important;
+}

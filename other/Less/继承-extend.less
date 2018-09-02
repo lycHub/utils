@@ -1,0 +1,42 @@
+@nice-blue: #ad2393;
+
+#box{
+  .inline{
+    color: @nice-blue;
+  }
+
+  .exd{
+    &:extend(#box .inline);
+    // 也可以继承多个
+    // &:extend(#box .inline, .a, .b);
+    font-weight: bold;
+  }
+}
+
+/*
+extend默认是精确匹配，当extend参数的最后面指定all关键字时，就会模糊匹配
+*/
+
+.a.b.test,
+.test.c {
+  color: orange;
+}
+.test {
+  &:hover {
+    color: green;
+  }
+}
+
+.replacement:extend(.test all) {}
+
+// 编译为
+.a.b.test,
+.test.c,
+.a.b.replacement,
+.replacement.c {
+  color: orange;
+}
+.test:hover,
+.replacement:hover {
+  color: green;
+}

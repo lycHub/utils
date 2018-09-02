@@ -1,0 +1,70 @@
+/* & 运算符表示一个 嵌套规则 的父选择器 */
+
+// 伪类
+a {
+  color: blue;
+  &:hover {
+    color: green;
+  }
+}
+
+// 结果为：
+a {
+  color: blue;
+}
+a:hover {
+  color: green;
+}
+
+
+// 拼接选择器
+.button {
+  &-ok {
+    background-image: url("ok.png");
+  }
+  &-cancel {
+    background-image: url("cancel.png");
+  }
+}
+输出：
+
+.button-ok {
+  background-image: url("ok.png");
+}
+.button-cancel {
+  background-image: url("cancel.png");
+}
+
+
+// 多个 &
+.link {
+  & + & {
+    color: red;
+  }
+
+  & & {
+    color: green;
+  }
+
+  && {
+    color: blue;
+  }
+
+  &, &ish {
+    color: cyan;
+  }
+}
+
+// 将输出：
+.link + .link {
+  color: red;
+}
+.link .link {
+  color: green;
+}
+.link.link {
+  color: blue;
+}
+.link, .linkish {
+  color: cyan;
+}

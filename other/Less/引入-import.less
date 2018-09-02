@@ -1,0 +1,19 @@
+/*基本引入*/
+.foo {
+  background: #900;
+}
+
+// 不在乎位置
+@import "this-is-valid.less";
+
+
+/*引入时的配置选项*/
+// 只引用样式，不编译输出
+@import(reference) "this-is-valid.less";
+
+// 当一个CSS文件可能不兼容Less的时候可以使用
+@import (inline) "not-less-compatible.css";
+
+// 不管文件名后缀是什么，都当成是less或css文件
+@import (less) "foo.css";
+@import (css) "foo.less";

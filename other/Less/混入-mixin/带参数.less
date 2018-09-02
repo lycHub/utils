@@ -1,0 +1,51 @@
+.mixin(@color) {
+  color-1: @color;
+}
+
+.mixin(@color; @padding: 2) {
+  color-2: @color;
+  padding-2: @padding;
+}
+
+.some .selector div {
+  .mixin(#008000);
+}
+
+// 会编译为:
+.some .selector div {
+  color-1: #008000;
+  color-2: #008000;
+  padding-2: 2;
+}
+
+
+// 在引用时，可以指定参数名精确传参而不是按位置
+.mixin(@color: black; @margin: 10px; @padding: 20px) {
+  color: @color;
+  margin: @margin;
+  padding: @padding;
+}
+.class1 {
+  .mixin(@margin: 20px; @color: #33acfe);
+}
+.class2 {
+  .mixin(#efca44; @padding: 40px);
+}
+
+// 如果参数数量不确定，可用rest变量
+.mixin(...) {        // matches 0-N arguments
+.mixin() {           // matches exactly 0 arguments
+.mixin(@a: 1) {      // matches 0-1 arguments
+.mixin(@a: 1; ...) { // matches 0-N arguments
+.mixin(@a; ...) {    // matches 1-N arguments
+
+
+// @arguments表示所有传入的参数
+  .box-shadow(@x: 0; @y: 0; @blur: 1px; @color: #000) {
+    -webkit-box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    box-shadow: @arguments;
+  }
+  .big-block {
+    .box-shadow(2px; 5px);
+  }

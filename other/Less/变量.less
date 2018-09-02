@@ -1,0 +1,63 @@
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+
+#header {
+  color: @light-blue;
+}
+
+#box{
+  color: @nice-blue;
+}
+
+
+// 变量是延迟加载的，可以后声明。
+.lazy-eval {
+  width: @a;
+}
+@a: 9%;
+
+
+/* 提取公共路径 */
+@images: "../img";
+
+// Usage
+body {
+  color: #444;
+  background: url("@{images}/white-sand.png");
+}
+
+
+@themes: "../../src/themes";
+
+// 用法
+@import "@{themes}/tidal-wave.less";
+
+
+/* 变量还可作为类名或属性名 */
+@property: color;
+
+.widget {
+    @{property}: #0ee;
+  background-@{property}: #999;
+}
+
+// 便以为
+.widget {
+  color: #0ee;
+  background-color: #999;
+}
+
+
+@mySelector: banner;
+.@{mySelector} {
+  font-weight: bold;
+  line-height: 40px;
+  margin: 0 auto;
+}
+
+// 编译为：
+.banner {
+  font-weight: bold;
+  line-height: 40px;
+  margin: 0 auto;
+}

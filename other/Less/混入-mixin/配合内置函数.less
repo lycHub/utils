@@ -1,0 +1,23 @@
+// lightness是亮度值亮度值
+.mixin (@a) when (lightness(@a) >= 50%) {
+  background-color: black;
+}
+.mixin (@a) when (lightness(@a) < 50%) {
+  background-color: white;
+}
+.mixin (@a) {
+  color: @a;
+}
+
+.class1 { .mixin(#ddd) }
+.class2 { .mixin(#555) }
+
+
+
+.mixin (@a) when (isnumber(@a)) and (@a > 0) { ... }  // 与
+.mixin (@a) when (@a > 10), (@a < -10) { ... }  // 或
+.mixin (@b) when not (@b > 0) { ... } // 取反
+
+
+.mixin (@a) when (@a > 0) { ...  }
+.mixin (@a) when (default()) { ... }  // 未匹配到任何规则的默认行为
